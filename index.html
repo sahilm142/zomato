@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Zomato</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js" charset="utf-8"></script>
+     <script src="main.js" charset="utf-8"></script>
+  </head>
+  <body>
+<div id="header">
+<div id="title">
+  zomato
+</div>
+<div id="description">
+  Find the best resturants cafes and bars in India
+</div>
+<div class="container">
+
+  <div id="search">
+    <form>
+      <div class="form-row">
+<div class="form-group col-md-2">
+  <input type="text" class="form-control" id="name" placeholder="Dish">
+</div>
+<div class="form-group col-md-2">
+  <input type="text" class="form-control" id="minPrice" placeholder="Min. Price" value="0">
+</div>
+<div class="form-group col-md-2">
+  <input type="text" class="form-control" id="maxPrice" placeholder="Max. Price" value="1000">
+</div>
+<div class="form-group col-md-2">
+  <select id="minRating" class="form-control">
+    <option selected>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+  </select>
+</div>
+<div class="form-group col-md-2">
+  <select id="maxRating" class="form-control">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option selected>5</option>
+  </select>
+</div>
+<div class="form-group col-md-2">
+  <select id="type" class="form-control">
+    <option selected>All</option>
+    <option>Lunch</option>
+    <option>Dinner</option>
+  </select>
+</div>
+</div>
+<div style="text-align:centre">
+  <button type="button" class="btn btn-success" onclick="search()">SEARCH</button>
+</div>
+
+</div>
+</div>
+</div>
+
+  <div  class="container">
+  <div id="dishes" class="row items">
+
+        <div class="col-md-4   mx-auto">
+          <div class="item">
+            <img src={ {this.image}} onerror="this.onerror=null;this.src='pizza.jpg';" alt="Some Image" style="height:150px;width:100%">
+            <div>
+              <span class="name">Dal</span>
+              <span class="rating pull-right">4.2</span>
+            </div>
+
+            <div class="description">
+              Resturant Name
+            </div>
+            <div class="address">
+              address
+            </div>
+            <div class="price">
+              Price
+            </div>
+            <div class="acidjs-rating-stars">
+                <form>
+                       <input type="radio" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label><!--
+                    --><input type="radio" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label><!--
+                    --><input type="radio"  name="group-2" id="group-2-2" value="3" /><label for="group-2-2"></label><!--
+                    --><input type="radio" name="group-2" id="group-2-3" value="2" /><label for="group-2-3"></label><!--
+                    --><input type="radio" name="group-2" id="group-2-4"  value="1" /><label for="group-2-4"></label>
+                </form>
+            </div>
+          </div>
+          </div>
+</div>
+
+</div>
+<footer>
+  <div>
+  <hr>
+       <div class="text-center center-block">
+           <p class="txt-railway">- Bootsnipp.com -</p>
+           <br />
+               <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+             <a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+             <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+             <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+</div>
+   <hr>
+ </div>
+</footer>
+
+
+  </body>
+</html>
+                                                                        <!--                        HANDLEBARS                     -->
+
+
+<script id="templating" type="text/x-handlebars-template">​
+  {{#each dishes}}
+  <div class="col-md-4   mx-auto">
+    <div class="item">
+      <img src={ {image}} onerror="this.onerror=null;this.src='pizza.jpg';" alt="Some Image" style="height:150px;width:100%">
+      <div>
+        <span class="name">{{dish_name}}</span>
+        <span class="rating pull-right">{{dish_rating}}</span>
+      </div>
+
+      <div class="description">
+        {{dish_resturant}}
+      </div>
+      <div class="address">
+        {{dish_address}}
+      </div>
+      <div class="price">
+        {{dish_price}}
+      </div>
+      <div class="acidjs-rating-stars">
+          <form>
+                 <input type="radio" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label><!--
+              --><input type="radio" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label><!--
+              --><input type="radio"  name="group-2" id="group-2-2" value="3" /><label for="group-2-2"></label><!--
+              --><input type="radio" name="group-2" id="group-2-3" value="2" /><label for="group-2-3"></label><!--
+              --><input type="radio" name="group-2" id="group-2-4"  value="1" /><label for="group-2-4"></label>
+          </form>
+      </div>
+    </div>
+    </div>
+{{/each}}
+</script>
+
+
+
+
+                                                                         <!--                        CSS                     -->
+
+<style media="screen">
+#header{
+  width: 100%;
+  min-height: 400px;
+  padding-top: 160px;
+  background-image: url('pizza.jpg');
+  background-size:cover;
+  text-align: center;
+}
+#title{
+  text-align: center;
+  font-size: 40px;
+  color: #ffffff;
+}
+#description{
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  color: white;
+}
+#search{
+  margin-top: 20px;
+}
+.item{
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+margin-bottom: 50px;
+padding:5px;
+}
+#dishes{
+  height: 400px;
+  margin-top: 50px;
+  overflow-y: scroll;
+}
+.rating{
+  font-size: 13px;
+  color: white;
+  padding: 5px;
+  margin: 5px;
+  background-color: green;
+  border-radius: 5px;
+}
+.name{
+  font-size: 30px;
+  color: #E01E1E;
+}
+.description{
+  font-weight: bold;
+  font-size: 20px;
+}
+.address{
+  color: #aaaaaa;
+}
+
+/*                                                     RATING STRS                               */
+.acidjs-rating-stars label:hover,
+.acidjs-rating-stars label:hover ~ label
+{
+    color: #189800;
+}
+
+.acidjs-rating-stars *
+{
+    margin: 0;
+    padding: 0;
+}
+
+.acidjs-rating-stars input
+{
+    display: none;
+}
+
+.acidjs-rating-stars
+{
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.acidjs-rating-stars label
+{
+    color: #ccc;
+}
+
+.acidjs-rating-stars label::before
+{
+    content: "\2605";
+    width: 18px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.acidjs-rating-stars input:checked ~ label
+{
+    color: #f5b301;
+}
+
+</style>
