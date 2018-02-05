@@ -4,255 +4,236 @@
     <meta charset="utf-8">
     <title>Zomato</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+     <link rel="stylesheet" href="style.css">
      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js" charset="utf-8"></script>
      <script src="main.js" charset="utf-8"></script>
   </head>
   <body>
-<div id="header">
+<div id="homePage">
 <div id="title">
   zomato
 </div>
 <div id="description">
-  Find the best resturants cafes and bars in India
+  Find the best restaurants cafés and bars in India
 </div>
+<input type="text" id="dishName" placeholder="Search...">
+<button type="button" class="btn btn-primary" onclick="search()">Search</button>
+</div>
+
+<!--                                                                                    DISHES   PAGE                                  -->
+
+<span id="dishSearched" class="invisible"></span>
+<div id="dishPage">
+<div id="navbar">
 <div class="container">
-
-  <div id="search">
-    <form>
+<div id="title2">
+  <a href="">zomato</a>
+</div>
+<div id="searchBox2">
+<input type="text" placeholder="Search..." id="dishName2">
+<button type="button" class="btn btn-primary btn-lg" onclick="search2()" id="search2">SEARCH</button>
+</div>
+</div>
+</div>
+<div class="container" id="middle">
+  <div class="row">
+    <div class="col-md-3">
       <div class="form-row">
-<div class="form-group col-md-2">
-  <input type="text" class="form-control" id="name" placeholder="Dish">
-</div>
-<div class="form-group col-md-2">
-  <input type="text" class="form-control" id="minPrice" placeholder="Min. Price" value="0">
-</div>
-<div class="form-group col-md-2">
-  <input type="text" class="form-control" id="maxPrice" placeholder="Max. Price" value="1000">
-</div>
-<div class="form-group col-md-2">
-  <select id="minRating" class="form-control">
-    <option selected>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-  </select>
-</div>
-<div class="form-group col-md-2">
-  <select id="maxRating" class="form-control">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option selected>5</option>
-  </select>
-</div>
-<div class="form-group col-md-2">
-  <select id="type" class="form-control">
-    <option selected>All</option>
-    <option>Lunch</option>
-    <option>Dinner</option>
-  </select>
-</div>
-</div>
-<div style="text-align:centre">
-  <button type="button" class="btn btn-success" onclick="search()">SEARCH</button>
-</div>
+        <div class="form-group col-md-6">
+           <label for="minPrice">Min. Price</label>
+          <input type="text" class="form-control choice" id="minPrice" placeholder="Min. Price" value="0">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="maxPrice">Max. Price</label>
+          <input type="text" class="form-control choice" id="maxPrice" placeholder="Max. Price" value="1000">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="minRating">Min. Rating</label>
+          <select id="minRating" class="form-control choice">
+            <option value="0" selected>0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="maxRating">Max. Rating</label>
+          <select id="maxRating" class="form-control choice">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5" selected>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="type">Type</label>
+          <select id="type" class="form-control choice">
+            <option selected>All</option>
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div id="dishes" class="row" style="margin-top:0px">
 
+    </div>
+    </div>
+  </div>
 </div>
 </div>
-</div>
-
-  <div  class="container">
-  <div id="dishes" class="row items">
-
-        <div class="col-md-4   mx-auto">
-          <div class="item">
-            <img src={ {this.image}} onerror="this.onerror=null;this.src='pizza.jpg';" alt="Some Image" style="height:150px;width:100%">
-            <div>
-              <span class="name">Dal</span>
-              <span class="rating pull-right">4.2</span>
-            </div>
-
-            <div class="description">
-              Resturant Name
-            </div>
-            <div class="address">
-              address
-            </div>
-            <div class="price">
-              Price
-            </div>
-            <div class="acidjs-rating-stars">
-                <form>
-                       <input type="radio" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label><!--
-                    --><input type="radio" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label><!--
-                    --><input type="radio"  name="group-2" id="group-2-2" value="3" /><label for="group-2-2"></label><!--
-                    --><input type="radio" name="group-2" id="group-2-3" value="2" /><label for="group-2-3"></label><!--
-                    --><input type="radio" name="group-2" id="group-2-4"  value="1" /><label for="group-2-4"></label>
-                </form>
-            </div>
-          </div>
-          </div>
-</div>
-
-</div>
+                                                                        <!--     FOOTER          -->
 <footer>
-  <div>
-  <hr>
-       <div class="text-center center-block">
-           <p class="txt-railway">- Bootsnipp.com -</p>
-           <br />
-               <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-             <a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-             <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-             <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+       <div class="container">
+            <div class="row">
+
+             <div class="search-text">
+               <div class="container">
+                 <div class="row text-center">
+
+                   <div class="form">
+                       <h4>SIGN UP TO OUR NEWSLETTER</h4>
+                        <form id="search-form" class="form-search form-horizontal">
+                            <input type="text" class="input-search" placeholder="Email Address">
+                            <button type="submit" class="btn-search">SUBMIT</button>
+                        </form>
+                    </div>
+
+                  </div>
+               </div>
+        	</div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <ul class="menu">
+                    <span>Countries</span>
+                        <li>
+                            <a href="#">India</a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/endless183">Pakistan</a>
+                        </li>
+                        <li>
+                            <a href="#">Bangladesh</a>
+                        </li>
+                        <li>
+                            <a href="#">Srilanka</a>
+                            </li>
+                        <li>
+                            <a href="#">Nepal</a>
+                        </li>
+                    </ul>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <ul class="menu">
+                    <span>Menu</span>
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                    <li>
+                            <a href="#">About</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Blog</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Gallery </a>
+                        </li>
+                     </ul>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <ul class="menu">
+                    <span>Contact</span>
+                        <li>
+                            <a href="#">Phone</a>
+                        </li>
+                        <li>
+                            <a href="#">Address</a>
+                        </li>
+                        <li>
+                            <a href="#">Email</a>
+                        </li>
+                   </ul>
+            </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                <ul class="adress">
+                    <span>Address</span>
+                        <li>
+                            <p>A-107, Boys Hostel, IIT Patna</p>
+                        </li>
+                        <li>
+                            <p>+919512345678</p>
+                        </li>
+                        <li>
+                            <p>info@gmail.com</p>
+                        </li>
+                     </ul>
+               </div>
+
+           </div>
+        </div>
+        <div class="text-center center-block">
+            <br />
+                <a href="https://www.facebook.com/sahil.mansoori.142"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+	            <a href="https://twitter.com/saikat.dakshana1"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+	            <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+	            <a href="mailto:arinjayakhare1@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
 </div>
-   <hr>
- </div>
-</footer>
+        <p class="text-center center-block">&copy; Restaurant App 2017</p>
+    </footer>
 
 
   </body>
 </html>
-                                                                        <!--                        HANDLEBARS                     -->
 
+                                                                        <!--                        HANDLEBARS                     -->
 
 <script id="templating" type="text/x-handlebars-template">​
   {{#each dishes}}
   <div class="col-md-4   mx-auto">
     <div class="item">
-      <img src={ {image}} onerror="this.onerror=null;this.src='pizza.jpg';" alt="Some Image" style="height:150px;width:100%">
+      <img src={{image}} onerror="this.onerror=null;this.src='pizza.jpg';" alt="Some Image" style="height:150px;width:100%">
+  <!---    <img src= {{image}} alt="some image" style="height:150px;width:100%">-->
       <div>
         <span class="name">{{dish_name}}</span>
         <span class="rating pull-right">{{dish_rating}}</span>
       </div>
 
       <div class="description">
-        {{dish_resturant}}
+        {{resteraunt_name}}
       </div>
       <div class="address">
-        {{dish_address}}
+        IIT Patna,Bihta,801103
       </div>
       <div class="price">
-        {{dish_price}}
+        {{Cost}}
       </div>
       <div class="acidjs-rating-stars">
           <form>
-                 <input type="radio" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label><!--
-              --><input type="radio" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label><!--
-              --><input type="radio"  name="group-2" id="group-2-2" value="3" /><label for="group-2-2"></label><!--
-              --><input type="radio" name="group-2" id="group-2-3" value="2" /><label for="group-2-3"></label><!--
-              --><input type="radio" name="group-2" id="group-2-4"  value="1" /><label for="group-2-4"></label>
+                 <input type="radio" name={{@index}} id={{@index}} data-dish="{{dish_name}}" data-resteraunt="{{resteraunt_name}}" data-value="5"/><label for={{@index}}></label><!--
+              --><input type="radio" name={{@index}} id={{@index}} data-dish="{{dish_name}}" data-resteraunt="{{resteraunt_name}}" data-value="4" /><label for={{@index}}></label><!--
+              --><input type="radio" name={{@index}} id={{@index}} data-dish="{{dish_name}}" data-resteraunt="{{resteraunt_name}}" data-value="3" /><label for={{@index}}></label><!--
+              --><input type="radio" name={{@index}} id={{@index}} data-dish="{{dish_name}}" data-resteraunt="{{resteraunt_name}}" data-value="2" /><label for={{@index}}></label><!--
+              --><input type="radio" name={{@index}} id={{@index}} data-dish="{{dish_name}}" data-resteraunt="{{resteraunt_name}}" data-value="1" /><label for={{@index}}></label>
           </form>
       </div>
     </div>
     </div>
 {{/each}}
 </script>
-
-
-
-
-                                                                         <!--                        CSS                     -->
-
-<style media="screen">
-#header{
-  width: 100%;
-  min-height: 400px;
-  padding-top: 160px;
-  background-image: url('pizza.jpg');
-  background-size:cover;
-  text-align: center;
-}
-#title{
-  text-align: center;
-  font-size: 40px;
-  color: #ffffff;
-}
-#description{
-  margin-top: 10px;
-  width: 100%;
-  text-align: center;
-  font-size: 25px;
-  color: white;
-}
-#search{
-  margin-top: 20px;
-}
-.item{
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-margin-bottom: 50px;
-padding:5px;
-}
-#dishes{
-  height: 400px;
-  margin-top: 50px;
-  overflow-y: scroll;
-}
-.rating{
-  font-size: 13px;
-  color: white;
-  padding: 5px;
-  margin: 5px;
-  background-color: green;
-  border-radius: 5px;
-}
-.name{
-  font-size: 30px;
-  color: #E01E1E;
-}
-.description{
-  font-weight: bold;
-  font-size: 20px;
-}
-.address{
-  color: #aaaaaa;
-}
-
-/*                                                     RATING STRS                               */
-.acidjs-rating-stars label:hover,
-.acidjs-rating-stars label:hover ~ label
-{
-    color: #189800;
-}
-
-.acidjs-rating-stars *
-{
-    margin: 0;
-    padding: 0;
-}
-
-.acidjs-rating-stars input
-{
-    display: none;
-}
-
-.acidjs-rating-stars
-{
-    unicode-bidi: bidi-override;
-    direction: rtl;
-}
-
-.acidjs-rating-stars label
-{
-    color: #ccc;
-}
-
-.acidjs-rating-stars label::before
-{
-    content: "\2605";
-    width: 18px;
-    line-height: 18px;
-    text-align: center;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.acidjs-rating-stars input:checked ~ label
-{
-    color: #f5b301;
-}
-
-</style>

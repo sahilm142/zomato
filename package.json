@@ -1,0 +1,31 @@
+{
+  "name": "zomato",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saikat041/zomato.git"
+  },
+  "keywords": [
+    "A",
+    "resturant",
+    "searching",
+    "app"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saikat041/zomato/issues"
+  },
+  "homepage": "https://github.com/saikat041/zomato#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.0-rc2",
+    "mysql": "^2.15.0"
+  }
+}

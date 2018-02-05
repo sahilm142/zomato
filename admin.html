@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h2 style="text-align:center">Add Data</h2>
+    <form class="form" action="/admin/add" method="post">
+      <div class="form-group">
+        <label for="resteraunt">Restaraunt</label>
+        <input type="text" class="form-control" id="resteraunt" name="resteraunt_name">
+      </div>
+      <div class="form-group">
+        <label for="dish">Dish</label>
+        <input type="text" class="form-control" id="dish" name="dish_name">
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text" class="form-control" id="price" name="price">
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select id="type" class="form-control choice" name="type">
+          <option selected>All</option>
+          <option>Breakfast</option>
+          <option>Lunch</option>
+          <option>Dinner</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="price">Image</label>
+        <input type="text" class="form-control" id="image" name="image">
+      </div>
+      <button  type="submit" class="btn btn-primary" value="Submit">Add Dish</button>
+    </form>
+        </div>
+
+<div class="container" id="data">
+  <h2 style="text-align:center">Data</h2>
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Dish Name</th>
+      <th scope="col">Resteraunt Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Dish Rating</th>
+      <th scope="col">No. Of rating</th>
+      <th scope="col">Type</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+</table>
+
+
+</div>
+  </body>
+
+</html>
+
+<!---         Handlebars          --->
+
+<script id="templating" type="text/x-handlebars-template">​
+  <h1 style="text-align:center">Data</h1>
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Dish Name</th>
+      <th scope="col">Restaurant Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Dish Rating</th>
+      <th scope="col">No. Of rating</th>
+      <th scope="col">Type</th>
+      <th scope="col">Delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {{#each dishes}}
+    <tr>
+      <td>{{dish_name}}</td>
+      <td>{{resteraunt_name}}</td>
+      <td>{{Cost}}</td>
+      <td>{{dish_rating}}</td>
+      <td>{{numberOfRatings}}</td>
+      <td>{{type}}</td>
+      <th scope="col"><button type="button" class="btn btn-danger delete" data-dish='{{dish_name}}' data-resteraunt='{{resteraunt_name}}'>Delete</button></th>
+    </tr>
+        {{/each}}
+  </tbody>
+</table>
+</script>
+
+<!---   Javascipt   --->
+
+<script type="text/javascript">
+$.ajax({
+  type:"GET",
+  url:"/admin/api",
+  cache:false,
+  contentType: "application/json; charset=utf-8",
+  dataType: "json",
+  success:function functionName(response) {
+    var theTemplateScript = $("#templating").html();
+    var theTemplate = Handlebars.compile(theTemplateScript);
+    $('#data').html(theTemplate({dishes:response.result}));
+    $('.delete').on('click',function (e) {
+      console.log(e.currentTarget.dataset);
+      delete_(e.currentTarget.dataset);
+    });
+  },
+  failure: function(response) {
+    console.log("data not received");
+  }
+});
+
+function delete_(data) {
+  $.ajax({
+    type:"GET",
+    url:"/admin/api/delete",
+    data:data,
+    cache:false,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success:function (response) {
+      console.log('deleted');
+      location.reload();
+    },
+    failure:function (response) {
+      console.log('delete failed');
+    }
+  });
+};
+</script>
